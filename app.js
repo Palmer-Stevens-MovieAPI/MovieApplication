@@ -1,3 +1,14 @@
+
+//Document Selector variables
+let movie ={};
+let submitButton = document.querySelector('#submitButton');
+let movieTitle = document.querySelector('#movieTitle');
+let movieRating = document.querySelector('#movieRating');
+
+
+/*************Event Listeners*****************/
+submitButton.addEventListener('click', submitButtonHandler);
+
 document.onreadystatechange = function() {
     if (document.readyState !== "complete") {
         document.querySelector("body").style.visibility = "hidden";
@@ -10,28 +21,7 @@ document.onreadystatechange = function() {
     }
 };
 
-let movie ={};
-let submitButton = document.querySelector('#submitButton');
-let movieTitle = document.querySelector('#movieTitle');
-let movieRating = document.querySelector('#movieRating');
-
-
-//Event listener
-submitButton.addEventListener('click', submitButtonHandler);
-
-
-
-function submitButtonHandler(){
-    movie.title = movieTitle.value;
-    movie.rating = movieRating.value;
-    postMovieData(movie);
-
-    console.log(movie.title);
-    console.log(movie.rating);
-
-    movieRating.value ='';
-    movieTitle.value = '';
-}
+/*******************Fetch request Functions*******************/
 function getAllData(){
     const url = 'https://planet-peach-snarl.glitch.me/movies';
     let movieData;
@@ -89,4 +79,18 @@ function deleteMovieData(movieData,id){
         .then(res => res.json())
         .then(getAllData)
         .catch(err => console.log(err));
+}
+
+/*******************Event Handler Functions*******************/
+
+function submitButtonHandler(){
+    movie.title = movieTitle.value;
+    movie.rating = movieRating.value;
+    postMovieData(movie);
+
+    console.log(movie.title);
+    console.log(movie.rating);
+
+    movieRating.value ='';
+    movieTitle.value = '';
 }
