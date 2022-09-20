@@ -1,3 +1,14 @@
+document.onreadystatechange = function() {
+    if (document.readyState !== "complete") {
+        document.querySelector("body").style.visibility = "hidden";
+        document.querySelector("form").style.visibility = "hidden";
+        document.querySelector("#loader").style.visibility = "visible";
+    } else {
+        document.querySelector("#loader").style.display = "none";
+        document.querySelector("form").style.visibility = "visible";
+        document.querySelector("body").style.visibility = "visible";
+    }
+};
 
 let movie ={};
 let submitButton = document.querySelector('#submitButton');
