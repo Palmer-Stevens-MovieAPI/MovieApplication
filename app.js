@@ -1,15 +1,16 @@
-
 //Document Selector variables
-let movie ={};
+let movie = {};
 let submitButton = document.querySelector('#submitButton');
 let movieTitle = document.querySelector('#movieTitle');
 let movieRating = document.querySelector('#movieRating');
+let inputDiv = document.querySelector('#loader');
+inputDiv.innerHTML = createHTML();
 
 
 /*************Event Listeners*****************/
 submitButton.addEventListener('click', submitButtonHandler);
 
-document.onreadystatechange = function() {
+document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
         document.querySelector("body").style.visibility = "hidden";
         document.querySelector("form").style.visibility = "hidden";
@@ -21,8 +22,41 @@ document.onreadystatechange = function() {
     }
 };
 
+
+/************Handler function*/
+function createHTML() {
+    let html = ``;
+    let data;
+
+    for (let i = 0; i < data.length; i += 1) {
+        // let title = new title(data);
+        html += `
+                        <div class="card behind">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                            <h6 class="title card-header d-flex justify-content-center">${movies[i].title}</h6>
+                            <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].movies.title}</h6>
+                            <hr>
+                            <p class="forecastFont ms-4">Director: <b>${data[i].movies.director}</b></p>
+
+                            <hr>
+                            <p class="forecastFont ms-4">Rating: <b>${data[i].movies.rating}</b></p>
+
+                            <hr>
+                            <p class="forecastFont ms-4">Genre: <b>${data[i].movies.genre}</b></p>
+
+                            <hr>
+                            <p class="forecastFont ms-4">ID: <b>${data[i].movies.id}</b></p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    `
+    }
+    return html;
+}
+
+
+
 /*******************Fetch request Functions*******************/
-function getAllData(){
+function getAllData() {
     const url = 'https://planet-peach-snarl.glitch.me/movies';
     let movieData;
     fetch(url)
@@ -32,7 +66,7 @@ function getAllData(){
 
 }
 
-function postMovieData(movieData){
+function postMovieData(movieData) {
     const url = 'https://planet-peach-snarl.glitch.me/movies';
     const options = {
         method: 'POST',
@@ -47,8 +81,8 @@ function postMovieData(movieData){
         .catch(err => console.log(err));
 }
 
-function patchMovieData(movieData,id){
-    const url = 'https://planet-peach-snarl.glitch.me/movies/'+id;
+function patchMovieData(movieData, id) {
+    const url = 'https://planet-peach-snarl.glitch.me/movies/' + id;
     console.log(url);
 
     const options = {
@@ -64,8 +98,8 @@ function patchMovieData(movieData,id){
         .catch(err => console.log(err));
 }
 
-function deleteMovieData(movieData,id){
-    const url = 'https://planet-peach-snarl.glitch.me/movies/'+id;
+function deleteMovieData(movieData, id) {
+    const url = 'https://planet-peach-snarl.glitch.me/movies/' + id;
     console.log(url);
 
     const options = {
@@ -83,7 +117,7 @@ function deleteMovieData(movieData,id){
 
 /*******************Event Handler Functions*******************/
 
-function submitButtonHandler(){
+function submitButtonHandler() {
     movie.title = movieTitle.value;
     movie.rating = movieRating.value;
     postMovieData(movie);
@@ -91,6 +125,9 @@ function submitButtonHandler(){
     console.log(movie.title);
     console.log(movie.rating);
 
-    movieRating.value ='';
+    movieRating.value = '';
     movieTitle.value = '';
 }
+
+/****************Cards with Movie Information*********************/
+
