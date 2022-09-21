@@ -3,7 +3,7 @@ let movie = {};
 let submitButton = document.querySelector('#submitButton');
 let movieTitle = document.querySelector('#movieTitle');
 let movieRating = document.querySelector('#movieRating');
-let movieInput = document.querySelector('#movieInput')
+let movieInput = document.querySelector('#movieInput');
 
 
 /************Code Execution******/
@@ -11,7 +11,13 @@ renderAllCards();
 
 /*************Event Listeners*****************/
 submitButton.addEventListener('click', submitButtonHandler);
+
 movieTitle.addEventListener('input', editButtonHandler);
+
+document.querySelector('.deleteButton').addEventListener('click',(e)=>{
+    // e.preventDefault();
+    console.log("hello");
+})
 
 document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
@@ -66,7 +72,7 @@ function createHTML(data) {
             <div class="card" style="width: 18rem; height: 24em;">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h6 class="title card-header d-flex justify-content-center">${data[i].title}</h6>
+                    <h6 data-title= ${data[i].title} class="title card-header d-flex justify-content-center">${data[i].title}</h6>
                     <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
                     <hr>
                     <p class="forecastFont ms-4">Director: <b>${data[i].director}</b></p>
@@ -78,7 +84,7 @@ function createHTML(data) {
                     <p class="forecastFont ms-4">Genre: <b>${data[i].genre}</b></p>
 
                     <hr>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#"  data-id= ${data[i].id} class="btn btn-primary deleteButton">Delete</a>
                 </div>
             </div>
             </div>
@@ -153,20 +159,24 @@ function patchMovieData(movieData, id) {
 }
 
 function deleteMovieData(movieData, id) {
-    const url = 'https://planet-peach-snarl.glitch.me/movies/' + id;
-    console.log(url);
+    let confirmDeletion = confirm("Are you sure want to delete this movie");
 
-    const options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieData),
-    };
-    fetch(url, options)
-        .then(res => res.json())
-        .then(getAllData)
-        .catch(err => console.log(err));
+    if(confirmDeletion){
+        const url = 'https://planet-peach-snarl.glitch.me/movies/' + id;
+        console.log(url);
+
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieData),
+        };
+        fetch(url, options)
+            .then(res => res.json())
+            .then(getAllData)
+            .catch(err => console.log(err));
+    }
 }
 
 
