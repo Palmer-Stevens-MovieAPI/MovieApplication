@@ -5,14 +5,21 @@ let movieTitle = document.querySelector('#movieTitle');
 let movieRating = document.querySelector('#movieRating');
 
 
-
 /************Code Execution******/
 // renderAllCards();
 // inputDiv.innerHTML = createHTML(movieData);
 
+let inputDiv = document.querySelector('#loader');
+
+
+/*************Code Execution**************/
+inputDiv.innerHTML = createHTML();
+
+
 
 /*************Event Listeners*****************/
 submitButton.addEventListener('click', submitButtonHandler);
+movieTitle.addEventListener('input', editButtonHandler);
 
 document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
@@ -27,8 +34,36 @@ document.onreadystatechange = function () {
 };
 
 
-/************Handler function****************/
-function createHTML(data) {
+
+/******************Handler function**********************/
+function submitButtonHandler() {
+    movie.title = movieTitle.value;
+    movie.rating = movieRating.value;
+    postMovieData(movie);
+
+    console.log(movie.title);
+    console.log(movie.rating);
+
+    movieRating.value = '';
+    movieTitle.value = '';
+}
+
+function editButtonHandler(e){
+    if(e.data !== null){
+        data += e.data;
+    }else{
+        data = data.slice(0,-1);
+    }
+
+    // if(data.length == 3){
+    findMovie(data);
+    // }
+
+
+    // console.log(data);
+}
+
+function createHTML() {
     let html = ``;
 
 
@@ -67,6 +102,19 @@ async function renderAllCards(){
 }
 
 
+function findMovie(title){
+    const url = 'https://planet-peach-snarl.glitch.me/movies/';
+    fetch(url)
+        .then(res => res.json())
+        .then(data =>{
+            let foundMovie = data.filter(movie => movie.title == title);
+            movieTitle.value = foundMovie[0].title;
+            movieRating.value =foundMovie[0].rating;
+            // console.log(data[30].title.includes('Big'));
+            // console.log(data.filter(movie => movie.title == title));
+        })
+        .catch(err => console.log(err));
+}
 
 /*******************Fetch request Functions*******************/
 function getAllData() {
@@ -141,5 +189,4 @@ function submitButtonHandler() {
     movieRating.value = '';
     movieTitle.value = '';
 }
-
 
