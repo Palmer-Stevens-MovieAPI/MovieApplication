@@ -17,18 +17,6 @@ submitButton.addEventListener('click', submitButtonHandler);
 
 movieTitle.addEventListener('input', editButtonHandler);
 
-document.onreadystatechange = function () {
-    if (document.readyState !== "complete") {
-        document.querySelector("body").style.visibility = "hidden";
-        document.querySelector("#loader").style.visibility = "visible";
-    } else {
-        setTimeout(() => {
-            document.querySelector("#loader").style.display = "none";
-            document.querySelector("body").style.visibility = "visible";
-        }, 1000)
-    }
-};
-
 
 /******************Handler function**********************/
 function submitButtonHandler() {
