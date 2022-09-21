@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<form action="index.html">
+    <button id="submitButton1" class="login__button1" type="submit">Go to Admin</button>
+</form>
+<!--<form id=form action="">-->
+<!--    <button id="submitButton" type="button">Submit</button>-->
+<!--</form>-->
+<div class="login">
+    <div class="login__content">
+        <div class="login__img">
+            <img src="..." alt="">
+        </div>
+
+        <div class="login__forms">
+            <!--            <form action="" class="login__registre" id="form">-->
+            <!--                <h1 class="login__title">Add New Movie?</h1>-->
+
+            <!--                <div class="login__box">-->
+            <!--                    <label>Movie Title</label>-->
+            <!--                    <input id="movieTitle" type="text" name="title" placeholder="Title">-->
+            <!--                </div>-->
+
+            <!--                <div class="login__box">-->
+            <!--                    <label>Movie Rating</label>-->
+            <!--                    <input id="movieRating" type="text" name="rating" placeholder="Rating">-->
+            <!--                </div>-->
+            <!--&lt;!&ndash;                <button id="submitButton" class="login__button" type="button">Submit</button>&ndash;&gt;-->
+            <!--                <a id="submitButton" href="#" class="login__button">ADD NEW MOVIE</a>-->
+            <!--            </form>-->
+
+            <form action="" class="login__create none" id="login-up">
+                <h1 class="login__title">Add New Movie</h1>
+
+                <div class="login__box">
+                    <i class='bx bx-user login__icon'></i>
+                    <input id="movieTitle" type="text" name="title" placeholder="Title" class="login__input">
+                    <!--                    <label>Movie Title</label>-->
+                    <!--                    <input id="movieTitle" name="title">-->
+                </div>
+
+                <div class="login__box">
+                    <i class='bx bx-lock-alt login__icon'></i>
+                    <input id="movieRating" type="text" name="rating" placeholder="Rating" class="login__input">
+                    <!--                    <label>Movie Rating</label>-->
+                    <!--                    <input id="movieRating"  name="rating" placeholder="Rating">&ndash;&gt;-->
+                </div>
+
+
+<!--                <button id="submitButton" class="login__button" type="button">Submit</button>-->
+                <a id="submitButton" href="#" class="login__button">ADD NEW MOVIE</a>
+
+                <div>
+                    <span class="login__account">Already have an Account ?</span>
+                    <span class="login__signup" id="sign-in">Sign In</span>
+
+                </div>
+
+                <div class="login__social">
+                    <a href="#" class="login__social-icon"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="login__social-icon"><i class='bx bxl-twitter'></i></a>
+                    <a href="#" class="login__social-icon"><i class='bx bxl-google'></i></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--===== MAIN JS =====-->
+<script src="app.js"></script>
+</body>
+</html>
