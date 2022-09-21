@@ -3,19 +3,11 @@ let movie = {};
 let submitButton = document.querySelector('#submitButton');
 let movieTitle = document.querySelector('#movieTitle');
 let movieRating = document.querySelector('#movieRating');
+let movieInput = document.querySelector('#movieInput')
 
 
 /************Code Execution******/
-// renderAllCards();
-// inputDiv.innerHTML = createHTML(movieData);
-
-let inputDiv = document.querySelector('#loader');
-
-
-/*************Code Execution**************/
-inputDiv.innerHTML = createHTML();
-
-
+renderAllCards();
 
 /*************Event Listeners*****************/
 submitButton.addEventListener('click', submitButtonHandler);
@@ -34,7 +26,6 @@ document.onreadystatechange = function () {
 };
 
 
-
 /******************Handler function**********************/
 function submitButtonHandler() {
     movie.title = movieTitle.value;
@@ -48,11 +39,11 @@ function submitButtonHandler() {
     movieTitle.value = '';
 }
 
-function editButtonHandler(e){
-    if(e.data !== null){
+function editButtonHandler(e) {
+    if (e.data !== null) {
         data += e.data;
-    }else{
-        data = data.slice(0,-1);
+    } else {
+        data = data.slice(0, -1);
     }
 
     // if(data.length == 3){
@@ -63,53 +54,55 @@ function editButtonHandler(e){
     // console.log(data);
 }
 
-function createHTML() {
+function createHTML(data) {
     let html = ``;
-
 
 
     // console.log(data);
     for (let i = 0; i < data.length; i += 1) {
         // let title = new title(data);
         html += `
-                        <div class="card behind">
-                        <img class="card-img-top" src="" alt="Card image cap">
-                            <h6 class="title card-header d-flex justify-content-center">${data[i].title}</h6>
-                            <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
-                            <hr>
-                            <p class="forecastFont ms-4">Director: <b>${data[i].director}</b></p>
+            <div class="col-3">
+            <div class="card" style="width: 18rem; height: 24em;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="title card-header d-flex justify-content-center">${data[i].title}</h6>
+                    <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
+                    <hr>
+                    <p class="forecastFont ms-4">Director: <b>${data[i].director}</b></p>
 
-                            <hr>
-                            <p class="forecastFont ms-4">Rating: <b>${data[i].rating}</b></p>
+                    <hr>
+                    <p class="forecastFont ms-4">Rating: <b>${data[i].rating}</b></p>
 
-                            <hr>
-                            <p class="forecastFont ms-4">Genre: <b>${data[i].genre}</b></p>
+                    <hr>
+                    <p class="forecastFont ms-4">Genre: <b>${data[i].genre}</b></p>
 
-                            <hr>
-                            <p class="forecastFont ms-4">ID: <b>${data[i].id}</b></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
+                    <hr>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            </div>
                     `
     }
     return html;
 }
 
-async function renderAllCards(){
+async function renderAllCards() {
     const url = 'https://planet-peach-snarl.glitch.me/movies';
     let res = await fetch(url);
     let movieData = await res.json();
-    document.querySelector('#tester').innerHTML = createHTML(movieData);
+  movieInput.innerHTML = createHTML(movieData);
+  //   console.log(movieData);
 }
 
-
-function findMovie(title){
+function findMovie(title) {
     const url = 'https://planet-peach-snarl.glitch.me/movies/';
     fetch(url)
         .then(res => res.json())
-        .then(data =>{
+        .then(data => {
             let foundMovie = data.filter(movie => movie.title == title);
             movieTitle.value = foundMovie[0].title;
-            movieRating.value =foundMovie[0].rating;
+            movieRating.value = foundMovie[0].rating;
             // console.log(data[30].title.includes('Big'));
             // console.log(data.filter(movie => movie.title == title));
         })
@@ -176,17 +169,6 @@ function deleteMovieData(movieData, id) {
         .catch(err => console.log(err));
 }
 
-/*******************Event Handler Functions*******************/
 
-function submitButtonHandler() {
-    movie.title = movieTitle.value;
-    movie.rating = movieRating.value;
-    postMovieData(movie);
 
-    console.log(movie.title);
-    console.log(movie.rating);
-
-    movieRating.value = '';
-    movieTitle.value = '';
-}
 
