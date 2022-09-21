@@ -3,8 +3,12 @@ let movie = {};
 let submitButton = document.querySelector('#submitButton');
 let movieTitle = document.querySelector('#movieTitle');
 let movieRating = document.querySelector('#movieRating');
-let inputDiv = document.querySelector('#loader');
-inputDiv.innerHTML = createHTML();
+
+
+
+/************Code Execution******/
+// renderAllCards();
+// inputDiv.innerHTML = createHTML(movieData);
 
 
 /*************Event Listeners*****************/
@@ -23,34 +27,43 @@ document.onreadystatechange = function () {
 };
 
 
-/************Handler function*/
-function createHTML() {
+/************Handler function****************/
+function createHTML(data) {
     let html = ``;
-    let data;
 
+
+
+    // console.log(data);
     for (let i = 0; i < data.length; i += 1) {
         // let title = new title(data);
         html += `
                         <div class="card behind">
                         <img class="card-img-top" src="" alt="Card image cap">
-                            <h6 class="title card-header d-flex justify-content-center">${movies[i].title}</h6>
-                            <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].movies.title}</h6>
+                            <h6 class="title card-header d-flex justify-content-center">${data[i].title}</h6>
+                            <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
                             <hr>
-                            <p class="forecastFont ms-4">Director: <b>${data[i].movies.director}</b></p>
+                            <p class="forecastFont ms-4">Director: <b>${data[i].director}</b></p>
 
                             <hr>
-                            <p class="forecastFont ms-4">Rating: <b>${data[i].movies.rating}</b></p>
+                            <p class="forecastFont ms-4">Rating: <b>${data[i].rating}</b></p>
 
                             <hr>
-                            <p class="forecastFont ms-4">Genre: <b>${data[i].movies.genre}</b></p>
+                            <p class="forecastFont ms-4">Genre: <b>${data[i].genre}</b></p>
 
                             <hr>
-                            <p class="forecastFont ms-4">ID: <b>${data[i].movies.id}</b></p>
+                            <p class="forecastFont ms-4">ID: <b>${data[i].id}</b></p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     `
     }
     return html;
+}
+
+async function renderAllCards(){
+    const url = 'https://planet-peach-snarl.glitch.me/movies';
+    let res = await fetch(url);
+    let movieData = await res.json();
+    document.querySelector('#tester').innerHTML = createHTML(movieData);
 }
 
 
@@ -129,5 +142,4 @@ function submitButtonHandler() {
     movieTitle.value = '';
 }
 
-/****************Cards with Movie Information*********************/
 
