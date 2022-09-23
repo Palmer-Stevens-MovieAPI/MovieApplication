@@ -87,7 +87,9 @@ async function renderAllCards() {
     console.log(movieData);
 }
 
-
+async function getDeleteButtons(){
+    let deleteButtons = document.getElementsByClassName('deleteButton');
+    return deleteButtons;
 
 }
 
