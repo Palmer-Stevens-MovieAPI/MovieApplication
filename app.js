@@ -1,50 +1,13 @@
+// change delete button to <button> tag
+
 //Document Selector variables
 let movie = {};
-let submitButton = document.querySelector('#submitButton');
-let movieTitle = document.querySelector('#movieTitle');
-let movieRating = document.querySelector('#movieRating');
-let movieInput = document.querySelector('#movieInput');
 
 
 /************Code Execution******/
 renderAllCards()
     .then(getDeleteButtons)
     .then(deleteMovieButton);
-
-
-/*************Event Listeners*****************/
-submitButton.addEventListener('click', submitButtonHandler);
-
-movieTitle.addEventListener('input', editButtonHandler);
-
-
-/******************Handler function**********************/
-function submitButtonHandler() {
-    movie.title = movieTitle.value;
-    movie.rating = movieRating.value;
-    postMovieData(movie);
-
-    console.log(movie.title);
-    console.log(movie.rating);
-
-    movieRating.value = '';
-    movieTitle.value = '';
-}
-
-function editButtonHandler(e) {
-    if (e.data !== null) {
-        data += e.data;
-    } else {
-        data = data.slice(0, -1);
-    }
-
-    // if(data.length == 3){
-    findMovie(data);
-    // }
-
-
-    // console.log(data);
-}
 
 
 /*******************Fetch request Functions*******************/
@@ -56,38 +19,6 @@ function getAllData() {
         .then(data => console.log(data))
         .catch(err => console.log(err));
 
-}
-
-function postMovieData(movieData) {
-    const url = 'https://planet-peach-snarl.glitch.me/movies';
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieData),
-    };
-    fetch(url, options)
-        .then(res => res.json())
-        .then(getAllData)
-        .catch(err => console.log(err));
-}
-
-function patchMovieData(movieData, id) {
-    const url = 'https://planet-peach-snarl.glitch.me/movies/' + id;
-    console.log(url);
-
-    const options = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieData),
-    };
-    fetch(url, options)
-        .then(res => res.json())
-        .then(getAllData)
-        .catch(err => console.log(err));
 }
 
 function deleteMovieData(id) {
@@ -108,7 +39,7 @@ function deleteMovieData(id) {
             .then(getAllData)
             .catch(err => console.log(err));
 
-        renderAllCards().reload();
+
     }
 }
 
@@ -156,23 +87,7 @@ async function renderAllCards() {
     console.log(movieData);
 }
 
-function findMovie(title) {
-    const url = 'https://planet-peach-snarl.glitch.me/movies/';
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            let foundMovie = data.filter(movie => movie.title == title);
-            movieTitle.value = foundMovie[0].title;
-            movieRating.value = foundMovie[0].rating;
-            // console.log(data[30].title.includes('Big'));
-            // console.log(data.filter(movie => movie.title == title));
-        })
-        .catch(err => console.log(err));
-}
 
-async function getDeleteButtons() {
-    let deleteButtons = document.getElementsByClassName('deleteButton');
-    return deleteButtons;
 
 }
 
