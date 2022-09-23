@@ -91,9 +91,9 @@ function patchMovieData(movieData, id) {
 }
 
 function deleteMovieData(id) {
-    let confirmDeletion = confirm("Are you sure want to delete this movie");
+    let confirmDeletion = confirm("Are you sure want to delete this movie?");
 
-    if(confirmDeletion){
+    if (confirmDeletion) {
         const url = 'https://planet-peach-snarl.glitch.me/movies/' + id;
         console.log(url);
 
@@ -102,14 +102,13 @@ function deleteMovieData(id) {
             headers: {
                 'Content-Type': 'application/json',
             }
-
         };
         fetch(url, options)
             .then(res => res.json())
             .then(getAllData)
             .catch(err => console.log(err));
 
-        renderAllCards();
+        renderAllCards().reload();
     }
 }
 
@@ -124,7 +123,7 @@ function createHTML(data) {
         // let title = new title(data);
         html += `
             <div class="col-3">
-            <div class="card" style="width: 18rem; height: 24em;">
+            <div class="card" style="border-radius: 25px background-color: rgba(244,242,245,0.99); border: solid 5px #874ec9; width: 18rem; height: 24em;">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h6 data-title= ${data[i].title} class="title card-header d-flex justify-content-center">${data[i].title}</h6>
@@ -139,7 +138,7 @@ function createHTML(data) {
                     <p class="forecastFont ms-4">Genre: <b>${data[i].genre}</b></p>
 
                     <hr>
-                    <a href="#"  data-id= ${data[i].id} class="btn btn-primary deleteButton">Delete</a>
+                    <a href="#" style="background-color: #572b8c; border-color: #572b8c" data-id= ${data[i].id} class="btn btn-primary deleteButton">Delete</a>
                 </div>
             </div>
             </div>
@@ -152,8 +151,9 @@ async function renderAllCards() {
     const url = 'https://planet-peach-snarl.glitch.me/movies';
     let res = await fetch(url);
     let movieData = await res.json();
+    console.log(typeof movieData);
     movieInput.innerHTML = createHTML(movieData);
-    //   console.log(movieData);
+    console.log(movieData);
 }
 
 function findMovie(title) {
@@ -170,16 +170,16 @@ function findMovie(title) {
         .catch(err => console.log(err));
 }
 
-async function getDeleteButtons(){
-        let deleteButtons = document.getElementsByClassName('deleteButton');
-        return deleteButtons;
+async function getDeleteButtons() {
+    let deleteButtons = document.getElementsByClassName('deleteButton');
+    return deleteButtons;
 
 }
 
-function deleteMovieButton(buttons){
+function deleteMovieButton(buttons) {
     let attribute;
-    for( let i =0; i< buttons.length; i++){
-        buttons[i].addEventListener('click',()=>{
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
             attribute = buttons[i].getAttribute('data-id');
             console.log(buttons[i]);
             console.log(attribute);
@@ -188,5 +188,19 @@ function deleteMovieButton(buttons){
     }
 }
 
-
+/*===== Test =====*/
+let onEdit = document.querySelector('#onEdit');
+onEdit.addEventListener('click', onEditHandler);
+function onEditHandler() {
+        document.querySelector("#onAdd").style.display = "hidden";
+        document.querySelector("onEdit").style.visibility = "visible";
+    // }
+}
+let onAdd = document.querySelector('#onAdd1')
+onAdd.addEventListener('click', onAddHandler)
+function onAddHandler() {
+    // if (onclick()) {
+    document.querySelector("#onEdit").style.visibility = "hidden";
+    document.querySelector("#onAdd").style.visibility = "visible";
+}
 
