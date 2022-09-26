@@ -24,13 +24,13 @@ editButton.addEventListener('click', editButtonHandler);
 
 /******************Handler function**********************/
 function submitButtonHandler() {
-    let movie = {};
-    movie.title = movieInputTitle.value;
-    movie.rating = movieInputRating.value;
-    postMovieData(movie);
+    // let movieData = {};
 
-    console.log(movie.title);
-    console.log(movie.rating);
+
+    findMovieOmbd(movieInputTitle.value);
+    // postMovieData(movie);
+
+
 
     movieInputRating.value = '';
     movieInputTitle.value = '';
@@ -140,4 +140,25 @@ function patchMovieData(movieData, id) {
         .then(res => res.json())
         .then(getAllData)
         .catch(err => console.log(err));
+}
+
+function handleData(data){
+    let movieData = {};
+    movieData.title = data.Title;
+    movieData.genre = data.Genre;
+    movieData.rated = data.Rated;
+    movieData.director = data.Director;
+    movieData.poster = data.Poster;
+
+    // console.log(data);
+    postMovieData(movieData);
+
+
+}
+
+function findMovieOmbd(movie){
+    fetch(`http://www.omdbapi.com/?t=${movie}&apikey=8eb7e45b`)
+        .then(res => res.json())
+        .then(handleData);
+        // .catch(err => console.log(err));
 }

@@ -56,7 +56,7 @@ function createHTML(data) {
         html += `
             <div class="col-3">
             <div class="card" style="width: 18rem; height: 24em;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src= ${data[i].poster} class="card-img-top" alt="...">
                 <div class="card-body">
                     <h6 data-title= ${data[i].title} class="title card-header d-flex justify-content-center">${data[i].title}</h6>
                     <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
