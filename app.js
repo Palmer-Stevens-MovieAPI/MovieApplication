@@ -54,8 +54,11 @@ function createHTML(data) {
         // let title = new title(data);
         html += `
             <div class="col-3">
+            <div class=“card” style=“width: 18rem; height: 24em;“>
+                <img src= ${data[i].poster} class=“card-img-top” alt=“...“>
 
-                <div class="card-body">
+             <div class=“card” style=“border-radius: 25px background-color: rgba(244,242,245,0.99); border: solid 5px #874EC9; width: 18rem; height: 24em;“>
+             <div class="card-body">
                     <h6 data-title= ${data[i].title} class="title card-header d-flex justify-content-center">${data[i].title}</h6>
                     <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
                     <hr>
@@ -69,7 +72,8 @@ function createHTML(data) {
 
                     <hr>
                     <a href="#" style="background-color: #572b8c; border-color: #572b8c" data-id= ${data[i].id} class="btn btn-primary deleteButton">Delete</a>
-                </div>
+            </div>
+            </div>
             </div>
             </div>
                     `
@@ -86,7 +90,7 @@ async function renderAllCards() {
     console.log(movieData);
 }
 
-async function getDeleteButtons(){
+async function getDeleteButtons() {
     let deleteButtons = document.getElementsByClassName('deleteButton');
     return deleteButtons;
 
@@ -107,13 +111,16 @@ function deleteMovieButton(buttons) {
 /*===== Test =====*/
 let onEdit = document.querySelector('#onEdit');
 onEdit.addEventListener('click', onEditHandler);
+
 function onEditHandler() {
-        document.querySelector("#onAdd").style.display = "hidden";
-        document.querySelector("onEdit").style.visibility = "visible";
+    document.querySelector("#onAdd").style.display = "hidden";
+    document.querySelector("onEdit").style.visibility = "visible";
     // }
 }
+
 let onAdd = document.querySelector('#onAdd1')
 onAdd.addEventListener('click', onAddHandler)
+
 function onAddHandler() {
     // if (onclick()) {
     document.querySelector("#onEdit").style.visibility = "hidden";

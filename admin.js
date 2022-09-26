@@ -159,6 +159,6 @@ function handleData(data){
 function findMovieOmbd(movie){
     fetch(`http://www.omdbapi.com/?t=${movie}&apikey=8eb7e45b`)
         .then(res => res.json())
-        .then(handleData);
+        .then(handleData)
         .catch(err => console.log(err));
 }
