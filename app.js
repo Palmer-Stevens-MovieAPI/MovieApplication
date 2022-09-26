@@ -54,8 +54,7 @@ function createHTML(data) {
         // let title = new title(data);
         html += `
             <div class="col-3">
-            <div class="card" style="border-radius: 25px background-color: rgba(244,242,245,0.99); border: solid 5px #874ec9; width: 18rem; height: 24em;">
-                <img src="..." class="card-img-top" alt="...">
+
                 <div class="card-body">
                     <h6 data-title= ${data[i].title} class="title card-header d-flex justify-content-center">${data[i].title}</h6>
                     <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
