@@ -83,6 +83,9 @@ function createHTML(data) {
 async function renderAllCards() {
     const url = 'https://planet-peach-snarl.glitch.me/movies';
     let res = await fetch(url);
+    if(res){
+        hideloader();
+    }
     let movieData = await res.json();
     console.log(typeof movieData);
     movieInput.innerHTML = createHTML(movieData);
@@ -126,3 +129,13 @@ function onAddHandler() {
     document.querySelector("#onAdd").style.visibility = "visible";
 }
 
+function hideloader() {
+
+    // Setting display of spinner
+    // element to none
+    let loaders = document.getElementsByClassName('loading');
+    console.log(loaders);
+    for (let i = 0; i < loaders.length; i++) {
+        loaders[i].hidden = true;
+    }
+}
