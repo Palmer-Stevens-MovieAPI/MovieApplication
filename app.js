@@ -53,26 +53,25 @@ function createHTML(data) {
     for (let i = 0; i < data.length; i += 1) {
         // let title = new title(data);
         html += `
-            <div class="col-3">
-            <div class=“card” style=“width: 18rem; height: 24em;“>
-                <img src= ${data[i].poster} class=“card-img-top” alt=“...“>
-
-             <div class=“card” style=“border-radius: 25px background-color: rgba(244,242,245,0.99); border: solid 5px #874EC9; width: 18rem; height: 24em;“>
+            <div class="col">
+                
+             <div class="card">
+             <img src= ${data[i].poster} class="card-img-top" alt=“...“>
              <div class="card-body">
-                    <h6 data-title= ${data[i].title} class="title card-header d-flex justify-content-center">${data[i].title}</h6>
-                    <h6 class="temp d-flex justify-content-center fw-bold">Movie Title: ${data[i].title}</h6>
-                    <hr>
-                    <p class="forecastFont ms-4">Director: <b>${data[i].director}</b></p>
+<!--              <img src= ${data[i].poster} class=“card-img-top” alt=“...“>-->
+                    <h6 data-title= ${data[i].title} class="card-title">${data[i].title}</h6>
+                    <h6 class="card-text">Movie Title: ${data[i].title}</h6>
+<!--                    <hr>-->
+                    <p class="card-text">Director: <b>${data[i].director}</b></p>
 
-                    <hr>
-                    <p class="forecastFont ms-4">Rating: <b>${data[i].rating}</b></p>
+<!--                    <hr>-->
+                    <p class="card-text">Rating: <b>${data[i].rating}</b></p>
 
-                    <hr>
-                    <p class="forecastFont ms-4">Genre: <b>${data[i].genre}</b></p>
+<!--                    <hr>-->
+                    <p class="card-text">Genre: <b>${data[i].genre}</b></p>
 
-                    <hr>
-                    <a href="#" style="background-color: #572b8c; border-color: #572b8c" data-id= ${data[i].id} class="btn btn-primary deleteButton">Delete</a>
-            </div>
+<!--                    <hr>-->
+                    <a href="#"  data-id= ${data[i].id} class="btn btn-primary deleteButton">Delete</a>
             </div>
             </div>
             </div>
